@@ -1,0 +1,47 @@
+2.1
+
+a) 42 = n
+b) x = y = 1
+c) n = 1 + 1;
+d) s = 'Ola'.
+e) 
+    x, y = 2, 2
+    print(xy)
+
+2.2
+
+1.
+
+from math import pi
+raio = 5
+volume = 4 / 3 * pi * raio ** 3
+
+2.
+
+preco_capa = 24.95 - (24.95 * .4)
+quantidade = 60
+transporte = 3 + quantidade * preco_cap + quantidade * .75
+
+3.
+
+hora_inicio = 6
+minuto_inicio = 52
+
+passo1_minuto = 8
+passo1_segundo = 15
+
+passo2_minuto = 7
+passo2_segundo = 12
+
+segundo_final = 2 * passo1_segundo + 3 * passo2_segundo
+
+minuto_final = segundo_final // 60
+
+minuto_final += 2 * passo1_minuto + 3 * passo2_minuto
+
+hora_final = hora_inicio + ((minuto_inicio + minuto_final) // 60)
+
+print(hora_final)
+
+
+
