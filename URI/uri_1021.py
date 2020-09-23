@@ -1,31 +1,19 @@
+notas = [100, 50, 20, 10, 5, 2]
+moedas = [1, 0.5, 0.25, 0.1, 0.05, 0.01]
+
 n = float(input())
 
-n100, resto = divmod(n, 100)
-n50, resto = divmod(resto, 50)
-n20, resto = divmod(resto, 20)
-n10, resto = divmod(resto, 10)
-n5, resto = divmod(resto, 5)
-n2, resto = divmod(resto, 2)
-
-m1, resto = divmod(resto, 1)
-m05, resto = divmod(resto, .5)
-m025, resto = divmod(resto, .25)
-m010, resto = divmod(resto, .1)
-m005, resto = divmod(resto, .05)
-m001, resto = divmod(resto, .01)
-
 print('NOTAS:')
-print('{} nota(s) de R$ 100.00'.format(int(n100)))
-print('{} nota(s) de R$ 50.00'.format(int(n50)))
-print('{} nota(s) de R$ 20.00'.format(int(n20)))
-print('{} nota(s) de R$ 10.00'.format(int(n10)))
-print('{} nota(s) de R$ 5.00'.format(int(n5)))
-print('{} nota(s) de R$ 2.00'.format(int(n2)))
+for nota in notas:
+    qtd_nota = int(n / nota)
+    n -= qtd_nota * nota
+    print(f'{int(qtd_nota)} nota(s) de R$ {nota:.2f}')
+
 print('MOEDAS:')
-print('{} moeda(s) de R$ 1.00'.format(int(m1)))
-print('{} moeda(s) de R$ 0.50'.format(int(m05)))
-print('{} moeda(s) de R$ 0.25'.format(int(m025)))
-print('{} moeda(s) de R$ 0.10'.format(int(m010)))
-print('{} moeda(s) de R$ 0.05'.format(int(m005)))
-print('{} moeda(s) de R$ 0.01'.format(int(m001)))
+for moeda in moedas:
+    qtd_moeda = int(round(n, 2) / moeda)
+    n -= qtd_moeda * moeda
+    print(f'{int(qtd_moeda)} moeda(s) de R$ {moeda:.2f}')
+
+
 
