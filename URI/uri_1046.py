@@ -1,4 +1,4 @@
-hi, hf = map(lambda x: int(x), input().split(" "))
+hi, hf = map(int, input().split())
 
 if hf <= hi:
     hd = hf - hi + 24

@@ -1,4 +1,5 @@
 valores_positivos = []
+
 for i in range(6):
     valor = float(input())
     if valor > 0:

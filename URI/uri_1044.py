@@ -1,14 +1,9 @@
-a, b = map(lambda x: float(x), input().split(" "))
+a, b = map(float, input().split())
 
-if a == b:
-    print("Sao Multiplos")
-elif a > b:
-    if a % b == 0:
-        print("Sao Multiplos")
-    else:
-        print("Nao sao Multiplos")
+if a < b:
+    a, b = b, a
+
+if a % b == 0:
+    print('Sao Multiplos')
 else:
-    if b % a == 0:
-        print("Sao Multiplos")
-    else:
-        print("Nao sao Multiplos")
+    print('Nao sao Multiplos')

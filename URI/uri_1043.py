@@ -1,4 +1,4 @@
-a, b, c = map(lambda x: float(x), input().split(" "))
+a, b, c = map(lambda x: float(x), input().split())
 
 if a < (b + c) and b < (a + c) and c < (a + b):
     perimetro = a + b + c

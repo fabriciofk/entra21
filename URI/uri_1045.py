@@ -1,4 +1,4 @@
-lados = [float(x) for x in input().split(" ")]
+lados = [float(x) for x in input().split()]
 a, b, c = sorted(lados, reverse=True)
 if a >= (b + c):
     print("NAO FORMA TRIANGULO")

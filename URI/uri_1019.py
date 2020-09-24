@@ -1,6 +1,4 @@
-N = int(input())
-horas = N // 3600
-N -= horas * 3600
-minutos = N // 60
-N -= minutos * 60
-print(f"{horas}:{minutos}:{N}")
+n = int(input())
+horas, n = divmod(n, 3600)
+minutos, n = divmod(n, 60)
+print(f"{horas}:{minutos}:{n}")
