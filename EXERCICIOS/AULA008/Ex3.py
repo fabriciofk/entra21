@@ -4,7 +4,7 @@
 # --- Escreva uma função para exibir uma pessoa específica:
 #     a função deve retornar uma pessoa cadastrada na função do ex1 filtrando
 #     por id
-from funcoes.funcoes_ex8 import Ex1
+from . import Ex1
 
 
 def show_people():

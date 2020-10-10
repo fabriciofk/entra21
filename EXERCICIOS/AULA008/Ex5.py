@@ -6,7 +6,7 @@
 # --- o programa deve passar o id obtido na função do ex1 para a função do ex2
 # --- o programa deve mostrar ao final os dados de todos as pessoas cadastradas
 #     com seus respectivos endereços utilizando as funções do ex3 e ex4
-from funcoes.funcoes_ex8 import Ex1, Ex2, Ex3, Ex4
+from . import Ex1, Ex2, Ex3, Ex4
 
 
 def show_header(title: str, character: str = '-') -> None:

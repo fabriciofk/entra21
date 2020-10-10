@@ -4,7 +4,7 @@
 # --- Escreva uma função para exibir um endereço específico:
 #     a função deve retornar um endereço cadastrado na função do ex2 filtrando
 #     por id da pessoa
-from funcoes.funcoes_ex8 import Ex1, Ex2
+from . import Ex1, Ex2
 
 
 def show_addresses():
