@@ -11,25 +11,32 @@
 #     um id
 # --- A função deve ser salva em um arquivo diferente do arquivo principal onde
 #     será chamada
-person_count = 2
-people_list = [
-    {
-        'id': 1,
-        'name': 'William',
-        'last_name': 'Círico',
-        'age': 20
-    },
-    {
-        'id': 2,
-        'name': 'Patrícia',
-        'last_name': 'Carvalho',
-        'age': 23
-    },
-]
+from custom_exceptions import MinorError
+
+
+# GLOBALS
+person_count = 0
+people_list = []
 
 
 def add_person(name: str, last_name: str, age: int) -> int:
+    """Adds a person to the people list.
+
+    Adds a person to the list if its age is greater or equal to 18.
+
+    Args:
+        name: Person's name.
+        last_name: Person's last name.
+        age: Person's age.
+
+    Returns:
+        Person's ID.
+
+    Raises:
+        MinorError: If age is under 18.
+    """
     global person_count, people_list
+
     if age >= 18:
         person_count += 1
 
@@ -39,13 +46,14 @@ def add_person(name: str, last_name: str, age: int) -> int:
             'last_name': last_name,
             'age': age
         }
+
         people_list.append(person)
-        print(people_list)
+
         print('Pessoa cadastrada com sucesso!')
 
         return person_count
     else:
-        raise ValueError('Falha ao cadastrar: Idade menor do que 18 anos.')
+        raise MinorError
 
 
 def main() -> None:

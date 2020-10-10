@@ -6,26 +6,29 @@
 # --- o programa deve passar o id obtido na função do ex1 para a função do ex2
 # --- o programa deve mostrar ao final os dados de todos as pessoas cadastradas
 #     com seus respectivos endereços utilizando as funções do ex3 e ex4
-from . import Ex1, Ex2, Ex3, Ex4
+import Ex1
+import Ex2
+import Ex3
+import Ex4
 
 
 def show_header(title: str, character: str = '-') -> None:
     print(f'{title.upper():{character}^50}')
 
 
-def show_footer(character: str = '-') -> None:
-    print(f'\n{character:{character}^50}')
+def show_hr(character: str = '-') -> None:
+    print(f'{character:{character}^50}')
 
 
 def show_menu(title: str, *args: str, character: str = '-') -> None:
     show_header(title, character)
 
-    print(f'\n\t\tEscolha uma opção:')
+    print(f'{"Escolha uma opção:": ^50}')
 
     for option in args:
-        print(f'\t\t{option}')
+        print(f'{option: ^50}')
 
-    show_footer()
+    show_hr(character)
 
 
 def people_register() -> None:
@@ -43,7 +46,7 @@ def people_register() -> None:
         # Adding the person to the list and extracting ID
         try:
             person_id = Ex1.add_person(name, last_name, age)
-        except ValueError as err:
+        except Exception as err:
             print(err)
             break
 
@@ -61,12 +64,12 @@ def people_register() -> None:
         try:
             Ex2.add_address(person_id, street, number, complement,
                             neighborhood, city, state)
-        except ValueError as err:
+        except Exception as err:
             print(err)
             break
 
         # Printing registration footer
-        show_footer()
+        show_hr()
 
         register_option = input('Deseja continuar cadastrando? (S/N): ')
 
@@ -74,33 +77,49 @@ def people_register() -> None:
             break
 
 
+def show_people_and_addresses() -> None:
+    if Ex1.people_list:
+        for person in Ex1.people_list:
+            Ex3.show_person_by_id(person['id'])
+            Ex4.show_address_by_id(person['id'])
+    else:
+        print('Nenhuma pessoa cadastrada.')
+
+
+def show_people_and_addresses_by_id() -> None:
+    person_id = int(input('Digite o ID da pessoa: '))
+
+    Ex3.show_person_by_id(person_id)
+    Ex4.show_address_by_id(person_id)
+
+
 def show_people_menu() -> None:
     while True:
         # Printing the show people menu
         show_menu('Listagem de Pessoas',
-                  '1) Listar todas as pessoas',
-                  '2) Listar pessoas por ID',
-                  '3) Voltar ao menu principal')
-        menu_option = input('Opção Escolhida: ')
+                  '1) Listar todas as pessoas e seus endereços',
+                  '2) Listar pessoa e seus endereço por ID',
+                  '3) Listar todas as pessoas',
+                  '4) Listar todos os endereços',
+                  '5) Voltar ao menu principal')
+        choosed_option = input('Opção Escolhida: ')
 
-        if menu_option == '3':
+        if choosed_option == '5':
             break
 
-        if menu_option == '1':
-            show_header('Listando todas as pessoas')
-            for person in Ex1.people_list:
-                Ex3.show_person_by_id(person['id'])
-                Ex4.show_address_by_id(person['id'])
-        elif menu_option == '2':
-            show_header('Listando pessoa pelo ID')
-            person_id = int(input('Digite o ID da pessoa: '))
+        menu_options = {
+            '1': show_people_and_addresses,
+            '2': show_people_and_addresses_by_id,
+            '3': Ex3.show_people,
+            '4': Ex4.show_addresses,
+        }
 
-            Ex3.show_person_by_id(person_id)
-            Ex4.show_address_by_id(person_id)
+        for option, function in menu_options.items():
+            if option == choosed_option:
+                function()
+                break
         else:
             print('Opção inválida.')
-
-        show_footer()
 
 
 def main():

@@ -4,19 +4,25 @@
 # --- Escreva uma função para exibir uma pessoa específica:
 #     a função deve retornar uma pessoa cadastrada na função do ex1 filtrando
 #     por id
-from . import Ex1
+import Ex1
 
 
-def show_people():
-    print('Listando pessoas:\n')
-    for person in Ex1.people_list:
-        print(f'\tPessoa {person["id"]}:\n')
-        print(f'\t\tNome: {person["name"]}')
-        print(f'\t\tSobrenome: {person["last_name"]}')
-        print(f'\t\tIdade: {person["age"]}\n')
+def show_people() -> None:
+    """Prints everyone in the people list"""
+    if Ex1.people_list:
+        print('Listando pessoas:\n')
+
+        for person in Ex1.people_list:
+            print(f'\tPessoa {person["id"]}:\n')
+            print(f'\t\tNome: {person["name"]}')
+            print(f'\t\tSobrenome: {person["last_name"]}')
+            print(f'\t\tIdade: {person["age"]}\n')
+    else:
+        print('Nenhuma pessoa cadastrada.')
 
 
 def show_person_by_id(person_id: int) -> None:
+    """Prints a person data by its ID"""
     for person in Ex1.people_list:
         if person_id == person['id']:
             print(f'Pessoa {person["id"]}\n')
@@ -29,7 +35,7 @@ def show_person_by_id(person_id: int) -> None:
     print('Não existe uma pessoa com o ID informado.')
 
 
-def main():
+def main() -> None:
     show_people()
     show_person_by_id(2)
 

@@ -8,26 +8,11 @@
 # --- a função deve retornar uma mensagem ao final de acordo com a situação
 # --- A função deve ser salva em um arquivo diferente do arquivo principal onde
 #     será chamada
-addresses_list = [
-        {
-            'person_id': 1,
-            'street': 'Sei lá',
-            'number': '123',
-            'complement': 'Casa',
-            'neighborhood': 'Velha',
-            'city': 'Blumenau',
-            'state': 'SC'
-        },
-        {
-            'person_id': 2,
-            'street': 'José Reuter',
-            'number': '1234',
-            'complement': 'Casa',
-            'neighborhood': 'Velha',
-            'city': 'Blumenau',
-            'state': 'SC'
-        }
-]
+from custom_exceptions import InvalidAddress
+
+
+# GLOBALS
+addresses_list = []
 
 
 def add_address(person_id: int,
@@ -36,7 +21,27 @@ def add_address(person_id: int,
                 complement: str,
                 neighborhood: str,
                 city: str,
-                state: str) -> None:
+                state: str
+                ) -> None:
+    """Adds an address to the addresses list.
+
+    Adds an address to the list if all fields are valid.
+
+    Args:
+        person_id: Person's id.
+        street: Name of the street.
+        number: Number of the house.
+        complement: Additional information.
+        neighborhood: Name of the neighborhood.
+        city: Name of the city.
+        state: Name of the state.
+
+    Returns:
+        None
+
+    Raises:
+        InvalidAddress: If there is an invalid field (None or '').
+    """
     global addresses_list
 
     address = {
@@ -49,22 +54,18 @@ def add_address(person_id: int,
         'state': state
     }
 
-    flag = False
-
-    for index, value in address.items():
+    # Verifying invalid fields
+    for value in address.values():
         if value == '' or value is None:
-            flag = True
-            break
+            raise InvalidAddress
 
-    if not flag:
-        addresses_list.append(address)
-        print('Endereço cadastrado com sucesso!')
-    else:
-        raise ValueError('Falha ao cadastrar: Dados de endereço inválidos.')
+    addresses_list.append(address)
+    print('Endereço cadastrado com sucesso!')
 
 
 def main() -> None:
     add_address(1, 'Rua sei lá', '123', 'Casa', 'Velha', 'Blumenau', 'SC')
+    add_address(1, 'Rua sei lá', '123', 'Casa', '', 'Blumenau', 'SC')
     print(addresses_list)
 
 
