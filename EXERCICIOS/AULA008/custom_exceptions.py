@@ -1,27 +1,16 @@
 class MinorError(Exception):
-    """Age under 18.
-
-    Attributes:
-        message: Explanation of the error
-    """
-    def __init__(self, message: str = "Idade menor do que 18 anos.") -> None:
+    def __init__(self, message: str = 'Menor de idade.') -> None:
         self.message = message
         super().__init__(self.message)
 
-    def __str__(self) -> str:
-        return f'Falha ao cadastrar: {self.message}'
+    def __str__(self):
+        return f'Erro: {self.message}'
 
 
-class InvalidAddress(Exception):
-    """Invalid address fields.
-
-        Attributes:
-            message: Explanation of the error.
-    """
-
-    def __init__(self, message: str = "Dados de endereço inválidos.") -> None:
+class InvalidFields(Exception):
+    def __init__(self, message: str = 'Dados inválidos'):
         self.message = message
         super().__init__(self.message)
 
-    def __str__(self) -> str:
-        return f'Falha ao cadastrar: {self.message}'
+    def __str__(self):
+        return f'Erro: {self.message}'
