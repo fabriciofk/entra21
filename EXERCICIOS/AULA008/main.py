@@ -1,9 +1,9 @@
 from people import person_register, get_person_by_id, get_people
-from address import address_register, get_address_by_id
+from addresses import address_register, get_address_by_id
 
 
 # Ex5
-def main():
+def main() -> None:
     while True:
         # Collecting person data
         print('Cadastrando pessoa')

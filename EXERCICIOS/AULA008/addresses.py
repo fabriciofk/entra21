@@ -40,7 +40,7 @@ def get_addresses() -> list:
 
 
 # Ex4
-def get_address_by_id(person_id):
+def get_address_by_id(person_id) -> dict:
     """Returns an address from the addresses list by the person's ID"""
     addresses = get_addresses()
 

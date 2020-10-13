@@ -43,6 +43,8 @@ def get_people() -> list:
 # Ex3
 def get_person_by_id(person_id: int) -> dict:
     """Returns a person from the people list by its ID"""
+    people_list = get_people()
+
     if people_list:
         for person in people_list:
             if person['id'] == person_id:
