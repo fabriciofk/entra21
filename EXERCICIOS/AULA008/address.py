@@ -1,5 +1,3 @@
-from custom_exceptions import InvalidFields
-
 # GLOBALS
 addresses_list = []
 
@@ -18,7 +16,7 @@ def address_register(person_id: int,
     # Validating parameters
     for key, value in locals().items():
         if value is None or value == '':
-            raise InvalidFields
+            raise ValueError('Erro: Dados de endereço inválidos.')
 
     address = {
         'person_id': person_id,
@@ -51,4 +49,5 @@ def get_address_by_id(person_id):
             if address['person_id'] == person_id:
                 return address
 
-    print(f'A pessoa com o ID({person_id}) não possui um endereço cadastrado.')
+    raise IndexError(f'A pessoa com o ID({person_id}) não possui um endereço '
+                     f'cadastrado.')

@@ -1,5 +1,3 @@
-from custom_exceptions import InvalidFields, MinorError
-
 # GLOBALS
 people_list = []
 person_count = 0
@@ -13,11 +11,11 @@ def person_register(name: str, last_name: str, age: int) -> int:
     # Validating parameters
     for key, value in locals().items():
         if value is None or value == '':
-            raise InvalidFields
+            raise ValueError('Erro: Dados da pessoa são inválidos.')
 
     # Age validation
     if age < 18:
-        raise MinorError
+        raise ValueError('Erro: Menor de idade.')
 
     # Incrementing person's ID
     person_count += 1
@@ -45,9 +43,9 @@ def get_people() -> list:
 # Ex3
 def get_person_by_id(person_id: int) -> dict:
     """Returns a person from the people list by its ID"""
+    if people_list:
+        for person in people_list:
+            if person['id'] == person_id:
+                return person
 
-    for person in people_list:
-        if person['id'] == person_id:
-            return person
-
-    print(f'Pessoa com o ID({person_id}) não está cadastrada.')
+    raise IndexError(f'Pessoa com o ID({person_id}) não está cadastrada.')

@@ -57,9 +57,9 @@ def main():
         print(f'\tSobrenome: {person_dict["last_name"]}')
         print(f'\tIdade: {person_dict["age"]}\n')
 
-        address_dict = get_address_by_id(person['id'])
+        try:
+            address_dict = get_address_by_id(person['id'])
 
-        if address_dict:
             print(f'Endereço do(a) {person_dict["name"]}')
             print(f'\tRua: {address_dict["street"]}')
             print(f'\tNúmero: {address_dict["number"]}')
@@ -67,6 +67,8 @@ def main():
             print(f'\tBairro: {address_dict["neighborhood"]}')
             print(f'\tCidade: {address_dict["city"]}')
             print(f'\tEstado: {address_dict["state"]}\n')
+        except IndexError as err:
+            print(err)
 
 
 if __name__ == '__main__':
