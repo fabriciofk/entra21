@@ -26,13 +26,20 @@ def address_register(person_id: int,
         'state': state
     }
 
-    # Adding the address to the list
-    with open('pessoas.csv', 'a', encoding='utf-8') as csvfile:
-        fieldnames = address.keys()
-        writer = DictWriter(csvfile, fieldnames=fieldnames)
+    # Adding the address to the file
+    fieldnames = address.keys()
 
-        writer.writeheader()
-        writer.writerow(address)
+    try:
+        with open('addresses.csv', 'x', encoding='utf-8') as csvfile:
+            csv_writer = DictWriter(csvfile, fieldnames=fieldnames)
+
+            csv_writer.writeheader()
+            csv_writer.writerow(address)
+    except FileExistsError:
+        with open('addresses.csv', 'a', encoding='utf-8') as csvfile:
+            csv_writer = DictWriter(csvfile, fieldnames=fieldnames)
+
+            csv_writer.writerow(address)
 
     print('Endereço cadastrado com sucesso.')
 
@@ -40,26 +47,19 @@ def address_register(person_id: int,
 # Ex4
 def get_addresses() -> list:
     """Returns the addresses list"""
-    addresses = []
-
-    with open('pessoas.csv', 'r', encoding='utf-8') as csvfile:
+    with open('addresses.csv', 'r', encoding='utf-8') as csvfile:
         csv_reader = DictReader(csvfile)
-        for line in csv_reader:
-            addresses.append(line)
-
-    print(addresses)
-    return addresses
+        return list(csv_reader)
 
 
 # Ex4
-def get_address_by_id(person_id):
+def get_address_by_id(person_id: str):
     """Returns an address from the addresses list by the person's ID"""
     addresses = get_addresses()
 
-    if addresses:
-        for address in addresses:
-            if address['person_id'] == person_id:
-                return address
+    for address in addresses:
+        if address['person_id'] == person_id:
+            return address
 
     raise IndexError(f'A pessoa com o ID({person_id}) não possui um endereço '
                      f'cadastrado.')
