@@ -4,7 +4,7 @@ import addresses
 
 
 # Ex5
-def main():
+def main() -> None:
     while True:
         # Collecting person data
         print('Cadastrando pessoa')

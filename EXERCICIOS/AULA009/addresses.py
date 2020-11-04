@@ -30,13 +30,13 @@ def address_register(person_id: int,
     fieldnames = address.keys()
 
     try:
-        with open('addresses.csv', 'x', encoding='utf-8') as csvfile:
+        with open('data/addresses.csv', 'x', encoding='utf-8') as csvfile:
             csv_writer = DictWriter(csvfile, fieldnames=fieldnames)
 
             csv_writer.writeheader()
             csv_writer.writerow(address)
     except FileExistsError:
-        with open('addresses.csv', 'a', encoding='utf-8') as csvfile:
+        with open('data/addresses.csv', 'a', encoding='utf-8') as csvfile:
             csv_writer = DictWriter(csvfile, fieldnames=fieldnames)
 
             csv_writer.writerow(address)
@@ -47,13 +47,13 @@ def address_register(person_id: int,
 # Ex4
 def get_addresses() -> list:
     """Returns the addresses list"""
-    with open('addresses.csv', 'r', encoding='utf-8') as csvfile:
+    with open('data/addresses.csv', 'r', encoding='utf-8') as csvfile:
         csv_reader = DictReader(csvfile)
         return list(csv_reader)
 
 
 # Ex4
-def get_address_by_id(person_id: str):
+def get_address_by_id(person_id: str) -> dict:
     """Returns an address from the addresses list by the person's ID"""
     addresses = get_addresses()
 

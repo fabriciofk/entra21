@@ -32,13 +32,13 @@ def person_register(name: str, last_name: str, age: int) -> int:
     fieldnames = person.keys()
 
     try:
-        with open('people.csv', 'x', encoding='utf-8') as csvfile:
+        with open('data/people.csv', 'x', encoding='utf-8') as csvfile:
             csv_writer = DictWriter(csvfile, fieldnames=fieldnames)
 
             csv_writer.writeheader()
             csv_writer.writerow(person)
     except FileExistsError:
-        with open('people.csv', 'a', encoding='utf-8') as csvfile:
+        with open('data/people.csv', 'a', encoding='utf-8') as csvfile:
             csv_writer = DictWriter(csvfile, fieldnames=fieldnames)
 
             csv_writer.writerow(person)
@@ -51,7 +51,7 @@ def person_register(name: str, last_name: str, age: int) -> int:
 # Ex3
 def get_people() -> list:
     """Returns the people list"""
-    with open('people.csv', 'r', encoding='utf-8') as csvfile:
+    with open('data/people.csv', 'r', encoding='utf-8') as csvfile:
         csv_reader = DictReader(csvfile)
         return list(csv_reader)
 
