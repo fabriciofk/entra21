@@ -1,0 +1,4 @@
+Produtos: [{'nome': 'galaxy Z', 'valor': 8109.0}, {'nome': 'iPad 7', 'valor': 3377.0}, {'nome': 'iPhone X', 'valor': 5949.15}, {'nome': 'playstation 5', 'valor': 4199.0}]
+Total dos produtos: 21634.15
+Valor com desconto: 19470.74
+Produto com o maior valor: {'nome': 'galaxy Z', 'valor': 8109.0}
