@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+# Associação -  Quando uma classe possui um objeto de outra classe.
+# Agregação - Quando uma classe possui vários objetos de outra classe.
+# Composição - Quando uma classe é dona de um objeto de outra classe.
 
 class Veiculo:
     def __init__(self, modelo: str, marca: str, cor: str) -> None:
@@ -12,7 +15,10 @@ class Veiculo:
         self.__passageiros.append(passageiro)
     
     def remove_passageiros(self, passageiro: Pessoa):        
-        self.__passageiros.remove(passageiro)
+        try:
+            self.__passageiros.remove(passageiro)
+        except ValueError:
+            print('Passageiro informado não está presente no veículo!')
 
     def listar_passageiros(self):
         for passageiro in self.__passageiros:

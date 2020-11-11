@@ -24,7 +24,6 @@ class Veiculo(ABC):
 
 
 class Carro(Veiculo):    
-
     def buzina(self) -> None:
         print(f'O carro do modelo {self.modelo} está buzinando.')
         

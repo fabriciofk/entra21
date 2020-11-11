@@ -1,14 +1,15 @@
 from abc import ABC, abstractmethod
 
 
-class Teclado(ABC):
+class Teclado:
     def __init__(self, modelo, cor, preco):
         self.modelo = modelo
         self.cor = cor
         self.preco = preco
     
-    @abstractmethod
-    def andar(self) -> None: ...
+    @staticmethod
+    def escrever() -> None: 
+        print('O teclado está escrevendo!')
 
 
 class Veiculo(ABC):
