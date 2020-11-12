@@ -16,20 +16,23 @@ class BankAccount:
         self.bank = bank
         self.account_number = account_number
         self.agency = agency
-        self.balance = balance    
+        self.balance = balance        
     
-    @staticmethod
-    def validate_login(account_number: str, password: str) -> dict:
+    @classmethod
+    def validate_login(cls, account_number: str, password: str) -> dict:
         data_reader = DataReader('bankaccounts.csv')
         data_list = data_reader.get_data()
-                
+
         for data_dict in data_list:            
-            if data_dict['account_number'] == account_number and data_dict['password'] == password:
-                return data_dict                
+            if data_dict['account_number'] == account_number: 
+                if data_dict['password'] == password:                    
+                    return data_dict
+                else:
+                    print('Dados inválidos!')                     
 
     @classmethod
     def make_deposit(cls, account_number: str, password: str, value: float) -> None:
-        target_data = cls.validate_login(account_number, password)
+        target_data = BankAccount.validate_login(account_number, password)        
 
         if target_data:    
             data_reader = DataReader('bankaccounts.csv')
