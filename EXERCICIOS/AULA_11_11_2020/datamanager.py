@@ -21,98 +21,38 @@ class DataWriter:
     def __init__(self, file_name: str) -> None:
         self.file_name = file_name
 
-    @staticmethod
-    def __set_foreign_key(value_dict: dict, foreign_keys: tuple) -> dict:
-        """
-                Converte uma lista de str para uma lista de int ou float.
-
-                Args:
-                    value_dict: lista de valores a serem convertidos.
-
-                Returns:
-                    Se for possível converter para inteiro retorna o valor
-                    em inteiro, senão tenta converter para float e retorna
-                    o valor, se nenhuma das operações anteriores foi bem-
-                    sucedida, retorna a lista de valores em seu estado
-                    original.
-                """
-        typecasted_data = {}
-        for key, value in value_dict.items():
-            for foreign_key in foreign_keys:
-                if hasattr(value, foreign_key):
-                    typecasted_data[key] = value.__getattribute__(foreign_key)
-            else:
-                typecasted_data[key] = value
-
-        return typecasted_data
-
-    def __set_fieldnames(self) -> list:
-        """Retorna uma Lista com os fieldnames do arquivo atual."""
-        fieldnames = {
-            'people.csv': ['name', 'age', 'cpf'],
-            'bankaccount.csv': ['person', 'password', 'bank', 'account_number', 'agency', 'balance']
-        }
-
-        for file_name, fieldnames_list in fieldnames.items():
-            if self.file_name == file_name:
-                return fieldnames_list
-
-    def save_data(self, data: object, foreign_key: tuple = None) -> None:
+    def save_data(self, data_dict: dict, fieldnames: List[str]) -> None:
         """
         Salva os dados de um objeto no arquivo csv correspondete a sua classe.
 
         Args:
-            data: objeto.
-            foreign_key: chave estrangeira.
+            data_dict: dicionário com objetos.
+            fieldnames: lista com os fieldnames do arquivo.
         """
-        # Armazenando os atributos do objeto como um dicionário.
-        data_dictionary = data.__dict__
-        # Armazenando os fieldnames de acordo com o objeto.
-        fieldnames = self.__set_fieldnames()
-
         try:
-            # Abrindo o arquivo em modo de abertura exclusiva.
             with open(self.file_name, 'x', encoding='utf-8', newline='') as csv_file:
-                # Instanciando um DicWriter com o arquivo e o nome dos campos.
                 csv_writer = DictWriter(csv_file, fieldnames=fieldnames)
                 csv_writer.writeheader()
-
-                # Verificando se existe uma foreign key nos dados.
-                if foreign_key:
-                    data_dictionary = self.__set_foreign_key(data_dictionary, foreign_key)
-
-                # Escrevendo a linha no arquivo.
-                csv_writer.writerow(data_dictionary)
+                csv_writer.writerow(data_dict)
         except FileExistsError:
-            # Abrindo o arquivo em modo de update.
             with open(self.file_name, 'a', encoding='utf-8', newline='') as csv_file:
-                # Instanciando um DicWriter com o arquivo e o nome dos campos.
                 csv_writer = DictWriter(csv_file, fieldnames=fieldnames)
+                csv_writer.writerow(data_dict)
 
-                # Verificando se existe uma foreign key nos dados.
-                if foreign_key:
-                    data_dictionary = self.__set_foreign_key(data_dictionary, foreign_key)
-
-                print(data_dictionary)
-                print(type(data_dictionary))
-
-                # Escrevendo a linha no arquivo.
-                csv_writer.writerow(data_dictionary)
-
-    def update_data(self, object_list: List[object]) -> None:
+    def update_data(self, dict_list: List[dict], fieldnames: List[str]) -> None:
         """
         Atualiza os dados.
 
         Args:
-            object_list: lista com os objetos atualizados.
+            dict_list: lista com os objetos atualizados.
+            fieldnames: lista com os fieldnames do arquivo.
         """
         with open(self.file_name, 'w', encoding='utf-8', newline='') as csv_file:
-            fieldnames = self.__set_fieldnames()
             csv_writer = DictWriter(csv_file, fieldnames=fieldnames)
             csv_writer.writeheader()
             # Escrevendo no arquivo
-            for obj in object_list:
-                csv_writer.writerow(obj.__dict__)
+            for data in dict_list:
+                csv_writer.writerow(data)
 
 
 class DataReader:
