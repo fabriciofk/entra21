@@ -34,4 +34,6 @@ if __name__ == "__main__":
     aluno.nome = 'Gabriel'
     aluno.mostra_dados() 
     print(aluno.__getattribute__('sobrenome'))
+    print(aluno.__dict__)
+    print(Aluno.mro())
     
