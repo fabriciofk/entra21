@@ -22,20 +22,22 @@ def database_operations(query: str, data: tuple = None) -> list:
 
 query_create_veiculo = """
     CREATE TABLE IF NOT EXISTS veiculo (
-            id_carro INTEGER PRIMARY KEY AUTOINCREMENT,
+            id_veiculo INTEGER PRIMARY KEY AUTOINCREMENT,
             nome TEXT NOT NULL,
             marca TEXT NOT NULL,
             modelo TEXT NOT NULL,
             ano INTEGER NOT NULL,
             placa TEXT NOT NULL,                
-            proprietario TEXT NOT NULL,
+            id_pessoa INTEGER NOT NULL,
             num_portas INTEGER NOT NULL,
             cor TEXT NOT NULL,
             km_rodados REAL NOT NULL,
             qtd_passageiros INTEGER NOT NULL,
             motor TEXT NOT NULL,
             combustivel TEXT NOT NULL,
-            meio_locomocao TEXT NOT NULL
+            meio_locomocao TEXT NOT NULL,
+            FOREIGN KEY (id_pessoa)
+                REFERENCES pessoa (id_pessoa)
         );
 """
 
@@ -53,7 +55,7 @@ query_create_pessoa = """
             nome_responsavel TEXT NOT NULL,
             sexo TEXT NOT NULL,
             naturalidade TEXT NOT NULL,
-            nacionalidade TEXT NOT NULL
+            nacionalidade TEXT NOT NULL            
         );           
 """
 
