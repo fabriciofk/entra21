@@ -1,25 +1,38 @@
 import sqlite3
 
 
-def database_operations(query: str, data: tuple = None) -> list:
+def banco_operacoes(query: str, dados: tuple = None) -> list:
+    """
+    Executa a query informada no banco de dados, se houver dados passados
+    como parâmetro, a query é executado com esses dados.
+
+    Args:
+        query: query do banco.
+        dados: dados utilizados na query.
+
+    Returns:
+        Uma lista com os registros presentes no cursor.
+    """
     try:
         with sqlite3.connect('database.db') as conn:
             # Instanciando o cursor
             cursor = conn.cursor()
 
-            if data:
-                cursor.execute(query, data)
+            if dados:
+                cursor.execute(query, dados)
+                conn.commit()
             else:
                 cursor.execute(query)
 
-            # Commit no banco
-            conn.commit()
-
             return cursor.fetchall()
     except Exception as err:
-        print(err)
+        print(f'Erro: {err}')
+        print('Não foi possível realizar a operação.')
 
 
+# ========================================================================== #
+#                  QUERIES PARA CRIAR AS TABELAS NO BANCO                    #
+# ========================================================================== #
 query_create_veiculo = """
     CREATE TABLE IF NOT EXISTS veiculo (
             id_veiculo INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -36,8 +49,8 @@ query_create_veiculo = """
             motor TEXT NOT NULL,
             combustivel TEXT NOT NULL,
             meio_locomocao TEXT NOT NULL,
-            FOREIGN KEY (id_pessoa)
-                REFERENCES pessoa (id_pessoa)
+            FOREIGN KEY(id_pessoa)
+                REFERENCES pessoa(id_pessoa)
         );
 """
 
@@ -59,9 +72,8 @@ query_create_pessoa = """
         );           
 """
 
-# Criando a tabela carro
-database_operations(query_create_veiculo)
-
-# Criando a tabela pessoa
-database_operations(query_create_pessoa)
-
+# ========================================================================== #
+#                           CRIANDO AS TABELAS                               #
+# ========================================================================== #
+banco_operacoes(query_create_pessoa)
+banco_operacoes(query_create_veiculo)
