@@ -125,9 +125,9 @@ def select_colunas(nome_tabela: str) -> list:
     """
     query = f'PRAGMA table_info({nome_tabela});'
 
-    pragma = banco_operacoes(query)
+    colunas = banco_operacoes(query)
 
-    return pragma
+    return colunas
 
 
 def select_todos_registros(nome_tabela: str) -> list:
@@ -142,9 +142,9 @@ def select_todos_registros(nome_tabela: str) -> list:
     """
     query = f'SELECT * FROM {nome_tabela};'
 
-    lista_pessoas = banco_operacoes(query)
+    lista_registros = banco_operacoes(query)
 
-    return lista_pessoas
+    return lista_registros
 
 
 def select_registro(nome_tabela: str, ide: int) -> tuple:
@@ -315,12 +315,7 @@ def atualizar_veiculo() -> None:
 
     print_veiculos()
 
-    colunas = select_colunas('veiculo')
-    # Dicionário com o ID do campo e o nome do Campo
-    colunas_dict = {str(campo[0]): campo[1] for campo in colunas}
-
     ide = int(input('Digite o ID do veículo que deseja alterar: '))
-
     try:
         select_registro('veiculo', ide)
         print('Veículo selecionado')
@@ -328,6 +323,9 @@ def atualizar_veiculo() -> None:
         print(select_registro('veiculo', ide))
 
         campo = input('Digite o número do campo que deseja alterar: ')
+
+        colunas = select_colunas('veiculo')
+        colunas_dict = {str(campo[0]): campo[1] for campo in colunas}
 
         for chave, valor in colunas_dict.items():
             if campo == chave:
@@ -349,18 +347,18 @@ def atualizar_pessoa() -> None:
 
     print_pessoas()
 
-    colunas = select_colunas('pessoa')
-    # Dicionário com o ID do campo e o nome do Campo
-    colunas_dict = {str(campo[0]): campo[1] for campo in colunas}
-
     ide = int(input('Digite o ID da pessoa que deseja alterar: '))
     try:
-        select_registro('pessoa', ide)
-        print('Veículo selecionado')
-        print_colunas('pessoa')
-        print(select_registro('pessoa', ide))
+        pessoa_selecionada = select_registro('pessoa', ide)
 
-        campo = input('Digite o número do campo que deseja alterar: ')
+        print('Pessoa selecionada:')
+        print_colunas('pessoa')
+        print(*pessoa_selecionada, sep=', ')
+
+        campo = input('Digite o índice do campo que deseja alterar: ')
+
+        colunas = select_colunas('pessoa')
+        colunas_dict = {str(campo[0]): campo[1] for campo in colunas}
 
         for chave, valor in colunas_dict.items():
             if campo == chave:
@@ -388,7 +386,7 @@ def deletar_dados() -> None:
 
     resp = print_menu('DELETAR DADOS', opcoes)
 
-    # --Deletar veiculo
+    # ---Deletar veículo
     if resp == '1':
         if select_todos_registros('pessoa'):
             print_pessoas()
