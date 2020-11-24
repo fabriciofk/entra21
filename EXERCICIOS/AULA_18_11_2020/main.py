@@ -258,16 +258,16 @@ def criar_veiculo() -> None:
         print('Não é possível cadastrar um veículo pois não existe nenhuma pessoa '
               'cadastrada no banco.')
     else:
-        nome = input('Digite o apelido do carro: ').upper()
-        marca = input('Digite a marca do carro: ').upper()
-        modelo = input('Digite o modelo do carro: ').upper()
-        ano = int(input('Digite o ano do carro: '))
-        placa = input('Digite a placa do carro: ').upper()
+        nome = input('Digite o apelido do veículo: ').upper()
+        marca = input('Digite a marca do veículo: ').upper()
+        modelo = input('Digite o modelo do veículo: ').upper()
+        ano = int(input('Digite o ano do veículo: '))
+        placa = input('Digite a placa do veículo: ').upper()
 
         while True:
             print_pessoas()
 
-            id_pessoa = input('Digite o ID do proprietário do carro: ')
+            id_pessoa = input('Digite o ID do proprietário do veículo: ')
 
             try:
                 select_registro('pessoa', id_pessoa)
@@ -275,11 +275,11 @@ def criar_veiculo() -> None:
             except IndexError:
                 print('ID informado não está cadastrado.')
 
-        num_portas = int(input('Digite a quantidade de portas do carro: '))
-        cor = input('Digite a cor do carro: ').upper()
+        num_portas = int(input('Digite a quantidade de portas do veículo: '))
+        cor = input('Digite a cor do veículo: ').upper()
         km_rodados = float(input('Digite a quantidade de km_rodados: '))
         qtd_passageiros = int(input('Digite a quantidade de passageiros: '))
-        motor = input('Digite o tipo de motor do carro: ').upper()
+        motor = input('Digite o tipo de motor do veículo: ').upper()
         combustivel = input('Digite o tipo de combustível: ').upper()
         meio_locomocao = input('Digite o meio de locomoção (TERRESTRE, AÉREO, MARÍTIMO): ').upper()
 
