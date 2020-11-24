@@ -147,13 +147,13 @@ def select_todos_registros(nome_tabela: str) -> list:
     return lista_registros
 
 
-def select_registro(nome_tabela: str, ide: int) -> tuple:
+def select_registro(nome_tabela: str, id_registro: str) -> tuple:
     """
     Seleciona um registro da tabela informada pelo ID.
 
     Args:
         nome_tabela: nome da tabela.
-        ide: ID do registro.
+        id_registro: ID do registro.
 
     Returns:
         Uma tupla com as informações do registro.
@@ -165,7 +165,7 @@ def select_registro(nome_tabela: str, ide: int) -> tuple:
 
     query = f'SELECT * FROM {nome_tabela} WHERE {id_tabela} = ?;'
 
-    registro = banco_operacoes(query, (ide,))[0]
+    registro = banco_operacoes(query, (id_registro,))[0]
 
     return registro
 # ========================================================================== #
@@ -244,11 +244,8 @@ def criar_pessoa() -> None:
             'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'
 
     # Salvando o objeto no banco
-    try:
-        banco_operacoes(query, pessoa.to_tuple())
-        print('Pessoa cadastrada com sucesso!')
-    except:
-        ...
+    banco_operacoes(query, pessoa.to_tuple())
+    print('Pessoa cadastrada com sucesso!')
 
 
 def criar_veiculo() -> None:
@@ -261,16 +258,16 @@ def criar_veiculo() -> None:
         print('Não é possível cadastrar um veículo pois não existe nenhuma pessoa '
               'cadastrada no banco.')
     else:
-        nome = input('Digite o apelido do carro: ')
-        marca = input('Digite a marca do carro: ')
-        modelo = input('Digite o modelo do carro: ')
+        nome = input('Digite o apelido do carro: ').upper()
+        marca = input('Digite a marca do carro: ').upper()
+        modelo = input('Digite o modelo do carro: ').upper()
         ano = int(input('Digite o ano do carro: '))
-        placa = input('Digite a placa do carro: ')
+        placa = input('Digite a placa do carro: ').upper()
 
         while True:
             print_pessoas()
 
-            id_pessoa = int(input('Digite o ID do proprietário do carro: '))
+            id_pessoa = input('Digite o ID do proprietário do carro: ')
 
             try:
                 select_registro('pessoa', id_pessoa)
@@ -279,12 +276,12 @@ def criar_veiculo() -> None:
                 print('ID informado não está cadastrado.')
 
         num_portas = int(input('Digite a quantidade de portas do carro: '))
-        cor = input('Digite a cor do carro: ')
+        cor = input('Digite a cor do carro: ').upper()
         km_rodados = float(input('Digite a quantidade de km_rodados: '))
         qtd_passageiros = int(input('Digite a quantidade de passageiros: '))
-        motor = input('Digite o tipo de motor do carro: ')
-        combustivel = input('Digite o tipo de combustível: ')
-        meio_locomocao = input('Digite o meio de locomoção (TERRESTRE, AÉREO, MARÍTIMO): ')
+        motor = input('Digite o tipo de motor do carro: ').upper()
+        combustivel = input('Digite o tipo de combustível: ').upper()
+        meio_locomocao = input('Digite o meio de locomoção (TERRESTRE, AÉREO, MARÍTIMO): ').upper()
 
         # Instanciando o objeto
         veiculo = Veiculo(nome, marca, modelo, ano, placa, id_pessoa, num_portas, cor, km_rodados,
@@ -296,11 +293,8 @@ def criar_veiculo() -> None:
                 'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);'
 
         # Salvando o objeto no banco
-        try:
-            banco_operacoes(query, veiculo.to_tuple())
-            print('Veículo cadastrado com sucesso!')
-        except:
-            ...
+        banco_operacoes(query, veiculo.to_tuple())
+        print('Veículo cadastrado com sucesso!')
 
 # ========================================================================== #
 
@@ -315,12 +309,13 @@ def atualizar_veiculo() -> None:
 
     print_veiculos()
 
-    ide = int(input('Digite o ID do veículo que deseja alterar: '))
+    ide = input('Digite o ID do veículo que deseja alterar: ')
     try:
-        select_registro('veiculo', ide)
-        print('Veículo selecionado')
+        veiculo_selecionado = select_registro('veiculo', ide)
+        limpa_console()
+        print('Veículo selecionado:')
         print_colunas('veiculo')
-        print(select_registro('veiculo', ide))
+        print(*veiculo_selecionado, sep=', ')
 
         campo = input('Digite o número do campo que deseja alterar: ')
 
@@ -347,10 +342,10 @@ def atualizar_pessoa() -> None:
 
     print_pessoas()
 
-    ide = int(input('Digite o ID da pessoa que deseja alterar: '))
+    ide = input('Digite o ID da pessoa que deseja alterar: ')
     try:
         pessoa_selecionada = select_registro('pessoa', ide)
-
+        limpa_console()
         print('Pessoa selecionada:')
         print_colunas('pessoa')
         print(*pessoa_selecionada, sep=', ')
@@ -386,48 +381,62 @@ def deletar_dados() -> None:
 
     resp = print_menu('DELETAR DADOS', opcoes)
 
-    # ---Deletar veículo
+    limpa_console()
+    # ---Deletar pessoa
     if resp == '1':
         if select_todos_registros('pessoa'):
             print_pessoas()
             id_pessoa = input('Digite o ID da pessoa que você quer remover: ')
 
-            query_veiculos = 'SELECT id_veiculo FROM veiculo WHERE id_pessoa = ?;'
-            id_veiculos = banco_operacoes(query_veiculos, id_pessoa)
-            if id_veiculos:
-                for ide in id_veiculos:
-                    query = 'DELETE FROM veiculo WHERE id_veiculo = ?;'
-                    banco_operacoes(query, ide)
+            try:
+                # Verificando se a pessoa com o ID informado existe
+                select_registro('pessoa', id_pessoa)
 
-            query = """
-                            DELETE FROM pessoa 
-                            WHERE id_pessoa = ?
-                        """
-            banco_operacoes(query, id_pessoa)
-            print('A pessoa e seus veículos foram deletados com sucesso!')
-            input('Pressione RETURN para voltar ao menu principal.')
+                # Deletando todos os veículos associados a pessoa
+                query_select_veiculos = 'SELECT id_veiculo FROM veiculo WHERE id_pessoa = ?;'
+                lista_veiculos = banco_operacoes(query_select_veiculos, id_pessoa)
+                if lista_veiculos:
+                    query_delete = 'DELETE FROM veiculo WHERE id_veiculo = ?;'
+                    for veiculo in lista_veiculos:
+                        banco_operacoes(query_delete, veiculo)
+
+                # Deletando o registro da pessoa selecionada do banco de dados
+                query_delete = """
+                                            DELETE FROM pessoa 
+                                            WHERE id_pessoa = ?
+                                        """
+                banco_operacoes(query_delete, id_pessoa)
+                print('A pessoa e seus veículos foram deletados com sucesso!')
+            except IndexError:
+                print('Não existe uma pessoa cadastrada com o ID informado.')
         else:
             print('Não é possível realizar a operação: Nenhuma pessoa cadastrada.')
-            input('Pressione RETURN para voltar ao menu principal.')
 
     # ---Deletar veículo
     elif resp == '2':
         if select_todos_registros('veiculo'):
             print_veiculos()
             id_veiculo = input('Digite o ID do veículo que você quer remover: ')
-            query = """
-                        DELETE FROM veiculo 
-                        WHERE id_veiculo = ?
-                    """
-            banco_operacoes(query, id_veiculo)
-            print('O veículo foi deletado com sucesso!')
-            input('Pressione RETURN para voltar ao menu principal.')
+
+            try:
+                # Verificando se o veículo com o ID informado existe
+                select_registro('veiculo', id_veiculo)
+
+                # Deletando o veículo do banco de dados
+                query_delete = """
+                                        DELETE FROM veiculo 
+                                        WHERE id_veiculo = ?
+                                    """
+                banco_operacoes(query_delete, id_veiculo)
+                print('O veículo foi deletado com sucesso!')
+            except IndexError:
+                print('Não existe um veículo cadastrado com o ID informado.')
         else:
             print('Não é possível realizar a operação: Nenhum veículo cadastrado.')
-            input('Pressione RETURN para voltar ao menu principal.')
     else:
         print('Você digitou uma opção inválida!')
-        input('Pressione RETURN para voltar ao menu principal.')
+
+    input('Pressione RETURN para voltar ao menu principal.')
 
 # ========================================================================== #
 

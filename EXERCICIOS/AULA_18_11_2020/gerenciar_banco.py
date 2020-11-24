@@ -27,7 +27,6 @@ def banco_operacoes(query: str, dados: tuple = None) -> list:
             return cursor.fetchall()
     except Exception as err:
         print(f'Erro: {err}')
-        print('Não foi possível realizar a operação.')
 
 
 # ========================================================================== #
