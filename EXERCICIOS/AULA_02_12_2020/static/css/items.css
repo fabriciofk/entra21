@@ -1,0 +1,37 @@
+.items {
+    text-align: center;
+    width: 90%;    
+}
+
+.items table {
+    display: none;
+    width: 90%;
+    margin: 10px auto;
+}
+
+.items th, td {
+    padding: 10px;
+}
+
+.items tr {
+    border-bottom: 1px solid black;
+}
+
+.items li {
+    margin: 10px;
+    padding: 1em;    
+}
+
+.items li:hover {
+    background-color: white;
+}
+
+.items li:hover table{
+    display: table;
+}
+
+.footer {    
+    position: fixed;
+    bottom: 0;
+}
+

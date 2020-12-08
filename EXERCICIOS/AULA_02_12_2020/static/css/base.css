@@ -1,0 +1,45 @@
+body {
+    background-image: url('../img/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.header {
+    background-color: white;
+}
+
+.header__title {
+    text-align: center;
+    font-size: 3em;
+    text-transform: uppercase;
+    padding: 10px;    
+}
+
+.header__nav a {
+    display: block;
+    padding: 1em;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.container {    
+    width: 98%;
+    margin: auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+
+.footer {
+    box-sizing: border-box;
+    width: 100%;
+    background-color: white;;
+    text-align: center;
+    padding: 1em;
+}

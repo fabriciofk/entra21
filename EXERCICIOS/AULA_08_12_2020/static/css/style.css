@@ -1,0 +1,288 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.header__contato {
+    background-color: #003366;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 15px;
+}
+
+.header__outros {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.iconp {
+    padding: 10px;
+    color: white;
+}
+
+.button--saibamais {
+    display: block;
+    background-color: #72120B;
+    padding: 18px 47px;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    width: fit-content;
+}
+
+.button--redondo {
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 30px;
+    margin: 0 10px;
+}
+
+.button--whats {
+    background-color: #2ba531;
+}
+
+.main__title--blue {
+    font-weight: bold;
+    font-size: 3em;
+    color: #003366;
+    text-transform: uppercase;
+}
+
+.main__title--red {
+    font-weight: bold;
+    font-size: 3em;
+    color: #72120B;
+    text-transform: uppercase;
+}
+
+.button--online {
+    background-color: #00B296;
+}
+
+.header__logo {
+    text-transform: uppercase;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;    
+    padding: 10px;    
+}
+
+.navigator ul {
+    text-align: center;
+}
+
+.navigator li {
+    display: inline-block;    
+}
+
+.navigator a {
+    color: black;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 30px;
+    padding: 10px;
+    margin: 20px;
+    font-weight: bold;
+}
+
+.navigator a:hover {
+    background-color: #003366;
+    color: white;
+}
+
+.main__slider {
+    line-height: 266px;
+    color: white;
+    text-align: center;
+    height: 266px;
+    background-color: black;
+}
+
+.main__welcome {
+    padding: 35px;
+    background-color: white;
+    display: grid;
+    grid-template-rows: repeat(4, auto);
+    grid-template-columns: 60% 40%;
+    grid-template-areas: 
+    'welcome__title welcome__image'
+    'main__line     welcome__image'
+    'welcome__p     welcome__image'
+    'welcome__button welcome__image'
+    ;    
+}
+
+.welcome__title {
+    grid-area: welcome__title;
+}
+
+.main__line {
+    grid-area: main__line;
+    height: 5px;
+    margin-right: 20px;
+    background-image: linear-gradient(90deg, #72120B 15%, #ccc 15%);
+}
+
+.welcome__p {
+    grid-area: welcome__p;
+}
+
+.welcome__button {
+    grid-area: welcome__button;
+    align-self: flex-end;
+}
+
+.welcome__image {
+    grid-area: welcome__image;
+}
+
+.features {
+    background-color: #003366;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px;
+}
+
+.features__card {
+    border: 2px solid rgba(251, 251, 251, 0.13);
+    border-radius: 8px;
+    padding: 10px;    
+    display: grid;
+    grid-template-columns: 300px;
+    grid-template-rows: 200px min-content min-content min-content;       
+    align-items: center;
+    text-align: center;    
+}
+
+.features__card img {
+   justify-self: center;
+}
+
+.card__title {
+    text-transform: uppercase;    
+    font-size: 28px;
+    color: white;
+    margin: 40px 0;
+}
+
+.card_p {    
+    font-size: 18px;
+    color: white;
+    margin: 40px 0;
+}
+
+.features__card  a {
+    justify-self: center;
+}
+
+.contato__form {
+    width: 80%;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.contato__title {
+    padding: 10px;
+}
+
+.contato__form form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas: 
+    'nome msg'
+    'email msg'
+    'telefone msg'
+    'enviar enviar';
+    grid-gap: 10px;
+}
+
+.contato__form input[type=text], .contato__form input[type="email"], textarea {
+    padding: 20px;
+    background-color: #eee;
+    border: none;
+    border-radius: 7px;
+}
+
+.contato__form input[type=submit] {
+    border: none;
+    color: white;
+    background-color: #72120b; 
+    padding: 20px;
+    border-radius: 7px;
+}
+
+.contato__textinput--nome {
+    grid-area: nome;
+}
+
+.contato__textinput--email {
+    grid-area: email;
+}
+
+.contato__textinput--telefone {
+    grid-area: telefone;
+}
+
+.contato__textarea {
+    grid-area: msg;
+    resize: none;
+}
+
+.contato__submit {
+    grid-area: enviar;
+}
+
+.contato__mapa iframe {
+    width: 100%;
+    height: 455px;
+}
+
+.footer {
+    display: flex;
+    padding: 100px 0;    
+    flex-flow: row wrap;
+    background-color: #003366;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.footer__contato {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.footer__p {
+    color: white;
+    font-weight: bold;
+    border-right: 2px solid white;
+    padding: 20px 15px;
+}
+
+.footer__logo--full {
+    border-top: 1px solid white;
+    background-color: #003366;
+    padding: 20px;
+    text-align: center;
+}
+
+.footer__logo--full p {
+    color: white;
+    font-size: 12px;
+}
+
+.footer__outros {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer__outros a {
+    margin: 10px;
+}
