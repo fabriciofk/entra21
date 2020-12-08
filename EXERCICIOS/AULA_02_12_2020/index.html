@@ -1,52 +1,45 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>5 lugares que eu quero viajar</title>
+    <meta charset="utf-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <!-- CSS -->
     <link rel="stylesheet" href="static/css/reset.css">
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/base.css">
+    <link rel="stylesheet" href="static/css/index.css">
 </head>
 <body>
-    <div class="center">
-        <h1>Meu plano de viagens</h1>
-        <div class="cards">
-            <a href="https://pt.wikipedia.org/wiki/Berna" class="card" target="_blank">    
-                <div class="card-img" style="background-image: url('static/img/berna.png');"></div>
-                <div class="card-text">
-                    <h2>Berna | Suíça</h2>
-                </div>        
-            </a>    
-
-            <a href="https://pt.wikipedia.org/wiki/Roma" class="card" target="_blank">
-                <div class="card-img" style="background-image: url('static/img/roma.jpg');"></div>
-                <div class="card-text">
-                    <h2>Roma | Itália</h2>
-                </div>
-            </a>
-
-            <a href="https://pt.wikipedia.org/wiki/Dubai" class="card" target="_blank">
-                <div class="card-img" style="background-image: url('static/img/dubai.jpg');"></div>
-                <div class="card-text">
-                    <h2>Dubai | Emirados Árabes</h2>
-                </div>
-            </a>
-
-            <a href="https://pt.wikipedia.org/wiki/Santorini" class="card" target="_blank">
-                <div class="card-img" style="background-image: url('static/img/santorini.jpg');"></div>
-                <div class="card-text">
-                    <h2>Santorini | Grécia</h2>
-                </div>
-            </a>
-
-            <a href="https://pt.wikipedia.org/wiki/Tóquio" class="card" target="_blank">
-                <div class="card-img" style="background-image: url('static/img/tokyo.jpg');"></div>
-                <div class="card-text">
-                    <h2>Tokyo | Japão</h2>
-                </div>
-            </a>
-        </div>
-        <a href="items.html" class="items-button">Lista de items necessários na viagem</a>
-    </div>
+<header class="header">
+    <h1 class="header__title">Meu plano de viagens</h1>
+    <nav class="header__nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="items.html">Itens necessários</a></li>
+        </ul>
+    </nav>
+</header>     
+<main class="container">    
+    <a href="https://pt.wikipedia.org/wiki/Berna" target="_blank" class="card">        
+        <img src="static/img/berna.png" class="card__image"/>
+        <h2 class="card__title">Berna | Suíça</h2>        
+    </a>
+    <a href="https://pt.wikipedia.org/wiki/Dubai" target="_blank" class="card">       
+        <img src="static/img/dubai.jpg" class="card__image"/>
+        <h2 class="card__title">Dubai | Emirados Árabes</h2>        
+    </a>
+    <a href="https://pt.wikipedia.org/wiki/Roma" target="_blank" class="card">       
+        <img src="static/img/roma.jpg" class="card__image"/>
+        <h2 class="card__title">Roma | Itália</h2>        
+    </a>
+    <a href="https://pt.wikipedia.org/wiki/Santorini" target="_blank" class="card">        
+        <img src="static/img/santorini.jpg" class="card__image" />
+        <h2 class="card__title">Santorini | Grécia</h2>        
+    </a>
+    <a href="https://pt.wikipedia.org/wiki/Tóquio" target="_blank" class="card">       
+        <img src="static/img/tokyo.jpg" class="card__image" />
+        <h2 class="card__title">Tokyo | Japão</h2>        
+    </a>    
+</main>
+<footer class="footer">Copyright William Círico © 2020</footer>  
 </body>
 </html>
