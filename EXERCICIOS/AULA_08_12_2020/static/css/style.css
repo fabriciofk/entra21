@@ -2,19 +2,24 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.fa-envelope-open-text {
+    font-size: 22px;
+}
+
 .header__contato {
     background-color: #003366;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     padding: 15px;
 }
 
 .header__outros {
+    margin-left: 100px;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-between;
+    justify-content: space-between;    
 }
 
 .iconp {
@@ -32,16 +37,26 @@ body {
     width: fit-content;
 }
 
+.button--online:hover {
+    background-color: #03816e;
+}
+
 .button--redondo {
+    display: block;
     color: white;
     text-decoration: none;
     padding: 15px;
     border-radius: 30px;
     margin: 0 10px;
+    font-size: 16px;
 }
 
 .button--whats {
     background-color: #2ba531;
+}
+
+.button--whats:hover {
+    background-color: #258b2a;
 }
 
 .main__title--blue {
@@ -66,12 +81,13 @@ body {
     text-transform: uppercase;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;    
     padding: 10px;    
 }
 
 .navigator ul {
+    margin-left: 30px;
     text-align: center;
 }
 
@@ -107,13 +123,17 @@ body {
     background-color: white;
     display: grid;
     grid-template-rows: repeat(4, auto);
-    grid-template-columns: 60% 40%;
+    grid-template-columns: 50% min-content;
     grid-template-areas: 
     'welcome__title welcome__image'
     'main__line     welcome__image'
     'welcome__p     welcome__image'
-    'welcome__button welcome__image'
-    ;    
+    'welcome__button welcome__image';  
+    justify-content: center;  
+}
+
+.main__welcome:hover .welcome__button {    
+    transform: scale(1.1);    
 }
 
 .welcome__title {
@@ -129,6 +149,8 @@ body {
 
 .welcome__p {
     grid-area: welcome__p;
+    color: #999;
+    line-height: 1.5;
 }
 
 .welcome__button {
@@ -137,27 +159,32 @@ body {
 }
 
 .welcome__image {
-    grid-area: welcome__image;
+    grid-area: welcome__image;    
 }
 
 .features {
     background-color: #003366;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     padding: 15px;
 }
 
 .features__card {
+    margin: 0 20px;
     border: 2px solid rgba(251, 251, 251, 0.13);
     border-radius: 8px;
     padding: 10px;    
     display: grid;
     grid-template-columns: 300px;
-    grid-template-rows: 200px min-content min-content min-content;       
+    grid-template-rows: 200px 60px 200px 60px;       
     align-items: center;
     text-align: center;    
+}
+
+.features__card:hover {
+    background-color: #02488f86;
 }
 
 .features__card img {
@@ -246,14 +273,15 @@ body {
 
 .footer {
     display: flex;
-    padding: 100px 0;    
+    padding: 25px 0;    
     flex-flow: row wrap;
     background-color: #003366;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 }
 
 .footer__contato {
+    margin: 40px;
     display: flex;
     flex-flow: row wrap;
     align-items: center;
@@ -278,11 +306,88 @@ body {
     font-size: 12px;
 }
 
-.footer__outros {
-    display: flex;
-    flex-direction: column;
-}
-
 .footer__outros a {
     margin: 10px;
 }
+
+/* Slideshow container */
+.slideshow-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+  }
+  
+  /* Hide the images by default */
+  .mySlides {
+    display: none;
+  }
+  
+  /* Next & previous buttons */
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+  }
+  
+  /* Position the "next button" to the right */
+  .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+  
+  /* On hover, add a black background color with a little bit see-through */
+  .prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+  }
+  
+  /* Number text (1/3 etc) */
+  .numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+  }
+  
+  /* The dots/bullets/indicators */
+  .dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+  
+  .active, .dot:hover {
+    background-color: #717171;
+  }
+  
+  /* Fading animation */
+  .fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+  }
+  
+  @-webkit-keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+  }
+  
+  @keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+  }

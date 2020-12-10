@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon-Card</title>
+    <style>
+        body * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .card {
+            border: 10px solid black;
+            border-radius: 10px;
+            width: 380px;
+            height: 600px;
+            padding: 4px;            
+        }
+
+        .first-line {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            border-bottom: 1px solid black;
+            font-size: 12px;
+            text-align: right;
+            margin-right: 10px;
+            padding-bottom: 4px;
+        }
+
+        .title {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .nome {
+            margin-left: 100px;
+            margin-right: 60px;
+        }
+
+        .hp {
+            color: red;
+        }
+
+        .elemento {
+            transform: translateY(-8px);            
+            width: 25px;
+            height: 25px;
+            background-color: black;
+            border-radius: 50%;
+        }
+
+        .imgpokemon {
+            margin: auto;
+            width: 90%;        
+            height: 270px;
+            border: 6px solid black;
+            box-shadow: 3px 3px 5px black;
+        }
+
+        .stage {
+            height: 40px;
+            width: 40px;
+            transform: translate(-10px, -20px);                        
+            background-color: black;            
+        }
+
+        .informacoes {            
+            width: 80%;
+            font-size: 13px;
+            padding: 1px 5px;
+            background-color: #ccc;
+            margin: 7px auto;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .pokemonpower {
+            width: 80%;
+            margin: auto;
+            text-align: justify;
+            font-size: 12px;
+        }
+
+        .pokemonpower b {
+            color: blue;
+            font-size: 14px;
+        }
+
+        .pokemonattack {
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            padding: 4px 0;
+            display: flex;
+            flex-direction: row;
+            align-items: center;   
+            width: 95%;    
+            margin: auto;     
+        }
+
+        .elementoattack {
+            display: grid;            
+            grid-template-columns: min-content min-content;
+            grid-template-rows: min-content min-content;
+            grid-gap: 2px;
+        }
+
+        .attacks {
+            width: 20px;
+            height: 20px;
+            background-color: black;
+            border-radius: 50%;
+        }
+
+        .attackdescription {
+            font-size: 16px;
+            margin-left: 4px;
+        }
+
+        .attackdescription b {
+            font-size: 18px;
+        }
+
+        .attackdamage {
+            font-size: 30px;
+        }
+
+        .status {
+            width: 90%;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: min-content min-content;
+            justify-items: center;
+        }
+
+        .pstatus__image {
+            width: 18px;
+            height: 18px;
+            background-color: black;
+            border-radius: 50%;
+        }
+
+        .curiosity {                              
+            width: 90%;
+            margin: 5px auto;
+            border: 2px groove black;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 0 5px;
+            text-align: justify;
+        }
+
+        .cardinformation {
+            text-align: center;
+            font-size: 9px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="first-line">
+            <p>Evolves from Charmeleon</p>        
+            <p>Put Charizard on the Stage 1 card</p>
+        </div>
+        <div class="title">
+            <h2 class="nome">Charizard</h2>
+            <h2 class="hp">120 HP</h2>
+            <div class="elemento"></div>
+        </div>
+        <div class="imgpokemon">
+            <div class="stage"></div>
+        </div>
+        <p class="informacoes"1>Flame Pokémon. Length: 5' 7", Weight: 200 lbs.</p>
+        <p class="pokemonpower"><b>Pokémon Power: Energy Burn</b> As often as 
+            you like during your turn (before your attack), you may turn all 
+            Energy attached to Charizard into (fire) Energy for the rest of the
+             turn. This power can't be used if Charizard is Asleep, Confused, 
+             or Paralyzed.
+        </p>        
+        <div class="pokemonattack">
+            <div class="elementoattack">
+                <div class="attacks"></div>
+                <div class="attacks"></div>
+                <div class="attacks"></div>
+                <div class="attacks"></div>
+            </div>            
+            <p class="attackdescription"><b>Fire spin</b> Discard 2 Energy cards attached to Charizard in order to use this attack.</p>
+            <h2 class="attackdamage">100</h2>
+        </div>
+        <div class="status">
+            <p class="pstatus1">weakness</p>
+            <p class="pstatus2">resistance</p>
+            <p class="pstatus3">retreat cost</p>
+            <div class="pstatus__image pstatus__image1"></div>
+            <div class="pstatus__image pstatus__image2"></div>
+            <div class="pstatus__image pstatus__image3"></div>
+        </div>
+        <p class="curiosity">Spits fire that is hot enough to melt boulder. Known to unintentionally cause forest fires. LV. 76 #6</p>
+        <p class="cardinformation">Illus. Mitsuhiro Arita &copy;1995, 96, 98 Nintendo, Creatures, GAMEFREAK &copy;1999-2000 Wizards.</p>
+    </div>
+</body>
+</html>
